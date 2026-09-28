@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics Dashboard | CargoPilot AI</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>🚢 CargoPilot AI</h2>
+
+    <ul>
+        <li><a href="dashboard.html">🏠 Dashboard</a></li>
+        <li><a href="challenges.html">⚠ Challenges</a></li>
+        <li><a href="route-optimization.html">📍 Route Optimization</a></li>
+        <li><a href="route-results.html">📊 Route Results</a></li>
+        <li><a href="quotation.html">💰 Quotation</a></li>
+        <li><a href="analytics.html">📈 Analytics</a></li>
+        <li><a href="login.html">🚪 Logout</a></li>
+    </ul>
+
+</div>
+
+<div class="main-content">
+
+    <div class="page-header">
+
+        <h1>📈 Analytics Dashboard</h1>
+
+        <p>
+            Route performance, freight cost trends,
+            and operational insights.
+        </p>
+
+    </div>
+
+    <!-- KPI Cards -->
+
+    <div class="kpi-grid">
+
+        <div class="kpi-card">
+            <h3>Total Routes</h3>
+            <h1>70</h1>
+        </div>
+
+        <div class="kpi-card">
+            <h3>Average Transit Time</h3>
+            <h1>24 Days</h1>
+        </div>
+
+        <div class="kpi-card">
+            <h3>Average Freight Cost</h3>
+            <h1>$1750</h1>
+        </div>
+
+        <div class="kpi-card">
+            <h3>AI Accuracy</h3>
+            <h1>95%</h1>
+        </div>
+
+    </div>
+
+    <!-- Charts -->
+
+    <div class="chart-grid">
+
+        <div class="chart-card">
+
+            <h2>Route Distribution</h2>
+
+            <canvas id="routeChart"></canvas>
+
+        </div>
+
+        <div class="chart-card">
+
+            <h2>Freight Cost Analysis</h2>
+
+            <canvas id="freightChart"></canvas>
+
+        </div>
+
+    </div>
+
+    <div class="chart-card full-width">
+
+        <h2>Transit Time Comparison</h2>
+
+        <canvas id="transitChart"></canvas>
+
+    </div>
+
+</div>
+
+<script>
+
+// Route Distribution
+
+new Chart(
+    document.getElementById("routeChart"),
+    {
+        type: "doughnut",
+        data: {
+            labels: [
+                "Chennai-Rotterdam",
+                "Mumbai-Hamburg",
+                "Singapore-Rotterdam"
+            ],
+            datasets: [{
+                data: [35, 25, 40]
+            }]
+        }
+    }
+);
+
+// Freight Cost Analysis
+
+new Chart(
+    document.getElementById("freightChart"),
+    {
+        type: "bar",
+        data: {
+            labels: [
+                "Route A",
+                "Route B",
+                "Route C",
+                "Route D"
+            ],
+            datasets: [{
+                label: "Freight Cost ($)",
+                data: [1850, 1720, 1900, 1650]
+            }]
+        }
+    }
+);
+
+// Transit Time Comparison
+
+new Chart(
+    document.getElementById("transitChart"),
+    {
+        type: "line",
+        data: {
+            labels: [
+                "Route A",
+                "Route B",
+                "Route C",
+                "Route D"
+            ],
+            datasets: [{
+                label: "Transit Days",
+                data: [24, 27, 25, 22],
+                tension: 0.4
+            }]
+        }
+    }
+);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CargoPilot AI Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h2>🚢 CargoPilot AI</h2>
+
+        <ul>
+            <li><a href="dashboard.html">🏠 Dashboard</a></li>
+            <li><a href="challenges.html">⚠ Challenges</a></li>
+            <li><a href="route-optimization.html">📍 Route Optimization</a></li>
+            <li><a href="quotation.html">💰 Quotation</a></li>
+            <li><a href="analytics.html">📈 Analytics</a></li>
+            <li><a href="login.html">🚪 Logout</a></li>
+        </ul>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <div class="welcome-banner">
+
+            <h1>
+                Welcome,
+                <span id="username">User</span>
+            </h1>
+
+            <p>
+                AI-powered Route Optimization &
+                Freight Pricing Platform
+            </p>
+
+        </div>
+
+        <h2>Dashboard Overview</h2>
+
+        <div class="dashboard-cards">
+
+            <div class="card"
+                 onclick="window.location.href='challenges.html'">
+
+                <h3>⚠ Business Challenges</h3>
+
+                <p>
+                    View industry challenges and
+                    how CargoPilot AI solves them.
+                </p>
+
+            </div>
+
+            <div class="card"
+                 onclick="window.location.href='route-optimization.html'">
+
+                <h3>📍 Route Optimization</h3>
+
+                <p>
+                    Find the best shipping route
+                    based on origin and destination.
+                </p>
+
+            </div>
+
+            <div class="card"
+                 onclick="window.location.href='quotation.html'">
+
+                <h3>💰 Freight Quotation</h3>
+
+                <p>
+                    Generate AI and Manual
+                    Freight Quotations.
+                </p>
+
+            </div>
+
+            <div class="card"
+                 onclick="window.location.href='analytics.html'">
+
+                <h3>📈 Analytics Dashboard</h3>
+
+                <p>
+                    View route, pricing,
+                    and performance insights.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<script>
+
+const username =
+    localStorage.getItem("username");
+
+if(username){
+    document.getElementById("username")
+        .innerText = username;
+}
+
+</script>
+
+</body>
+</html>

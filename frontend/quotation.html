@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freight Quotation | CargoPilot AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>🚢 CargoPilot AI</h2>
+
+    <ul>
+        <li><a href="dashboard.html">🏠 Dashboard</a></li>
+        <li><a href="challenges.html">⚠ Challenges</a></li>
+        <li><a href="route-optimization.html">📍 Route Optimization</a></li>
+        <li><a href="route-results.html">📊 Route Results</a></li>
+        <li><a href="quotation.html">💰 Quotation</a></li>
+        <li><a href="analytics.html">📈 Analytics</a></li>
+        <li><a href="login.html">🚪 Logout</a></li>
+    </ul>
+
+</div>
+
+<div class="main-content">
+
+    <div class="page-header">
+        <h1>💰 Freight Quotation Management</h1>
+        <p>
+            Compare AI-generated quotations with manually created quotations.
+        </p>
+    </div>
+
+    <div class="quotation-container">
+
+        <!-- AI Quotation -->
+
+        <div class="quotation-card">
+
+            <h2>🤖 AI Freight Quotation</h2>
+
+            <div class="quotation-box">
+
+                <p><strong>Route:</strong> <span id="aiRoute"></span></p>
+
+                <p><strong>Origin:</strong> <span id="aiOrigin"></span></p>
+
+                <p><strong>Destination:</strong> <span id="aiDestination"></span></p>
+
+                <p><strong>Containers:</strong> <span id="aiContainers"></span></p>
+
+                <p><strong>Rate Per Container:</strong> $<span id="aiRate"></span></p>
+
+                <hr>
+
+                <h2>
+                    Total Cost:
+                    $<span id="aiTotal"></span>
+                </h2>
+
+            </div>
+
+        </div>
+
+        <!-- Manual Quotation -->
+
+        <div class="quotation-card">
+
+            <h2>📝 Manual Freight Quotation</h2>
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Customer Name">
+
+            <input
+                type="number"
+                id="manualRate"
+                placeholder="Rate Per Container ($)">
+
+            <input
+                type="number"
+                id="additionalCharges"
+                placeholder="Additional Charges ($)">
+
+            <button
+                class="generate-btn"
+                onclick="generateManualQuote()">
+                Generate Manual Quote
+            </button>
+
+            <div
+                id="manualQuoteResult"
+                style="margin-top:20px;">
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Comparison Section -->
+
+    <div class="comparison-card">
+
+        <h2>📊 AI vs Manual Comparison</h2>
+
+        <div class="comparison-grid">
+
+            <div class="compare-box">
+
+                <h3>AI Quotation</h3>
+
+                <h1 id="compareAI">$0</h1>
+
+            </div>
+
+            <div class="compare-box">
+
+                <h3>Manual Quotation</h3>
+
+                <h1 id="compareManual">$0</h1>
+
+            </div>
+
+            <div class="compare-box">
+
+                <h3>Difference</h3>
+
+                <h1 id="difference">$0</h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const data =
+    JSON.parse(
+        localStorage.getItem("routeData")
+    );
+
+let aiTotalCost = 0;
+
+if(data){
+
+    const containers =
+        data.containers || 1;
+
+    aiTotalCost =
+        data.base_freight_usd * containers;
+
+    document.getElementById("aiRoute")
+        .innerText = data.route_id;
+
+    document.getElementById("aiOrigin")
+        .innerText = data.origin;
+
+    document.getElementById("aiDestination")
+        .innerText = data.destination;
+
+    document.getElementById("aiContainers")
+        .innerText = containers;
+
+    document.getElementById("aiRate")
+        .innerText = data.base_freight_usd;
+
+    document.getElementById("aiTotal")
+        .innerText = aiTotalCost.toLocaleString();
+
+    document.getElementById("compareAI")
+        .innerText = "$" +
+        aiTotalCost.toLocaleString();
+}
+
+function generateManualQuote(){
+
+    const rate =
+        parseFloat(
+            document.getElementById("manualRate").value
+        );
+
+    const additional =
+        parseFloat(
+            document.getElementById("additionalCharges").value
+        ) || 0;
+
+    const containers =
+        data.containers || 1;
+
+    const manualTotal =
+        (rate * containers) + additional;
+
+    const quoteId =
+        "QT-" + Math.floor(
+            Math.random() * 10000
+        );
+
+    document.getElementById(
+        "manualQuoteResult"
+    ).innerHTML = `
+
+        <div class="quotation-box">
+
+            <p><strong>Quotation ID:</strong> ${quoteId}</p>
+
+            <p><strong>Customer:</strong>
+            ${document.getElementById("customerName").value}</p>
+
+            <p><strong>Containers:</strong>
+            ${containers}</p>
+
+            <p><strong>Rate:</strong>
+            $${rate}</p>
+
+            <p><strong>Additional Charges:</strong>
+            $${additional}</p>
+
+            <hr>
+
+            <h2>Total Cost: $${manualTotal.toLocaleString()}</h2>
+
+        </div>
+
+    `;
+
+    document.getElementById("compareManual")
+        .innerText =
+        "$" + manualTotal.toLocaleString();
+
+    document.getElementById("difference")
+        .innerText =
+        "$" + Math.abs(
+            manualTotal - aiTotalCost
+        ).toLocaleString();
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Route Results | CargoPilot AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>🚢 CargoPilot AI</h2>
+
+    <ul>
+        <li><a href="dashboard.html">🏠 Dashboard</a></li>
+        <li><a href="challenges.html">⚠ Challenges</a></li>
+        <li><a href="route-optimization.html">📍 Route Optimization</a></li>
+        <li><a href="route-results.html">📊 Route Results</a></li>
+        <li><a href="quotation.html">💰 Quotation</a></li>
+        <li><a href="analytics.html">📈 Analytics</a></li>
+        <li><a href="login.html">🚪 Logout</a></li>
+    </ul>
+
+</div>
+
+<div class="main-content">
+
+    <div class="page-header">
+        <h1>📊 Route Recommendation Results</h1>
+        <p>
+            AI-powered route analysis and freight estimation.
+        </p>
+    </div>
+
+    <div class="results-container">
+
+        <div class="result-card">
+
+            <div class="status-badge">
+                ✓ AI Recommended Route
+            </div>
+
+            <h2 id="routeId">Route ID</h2>
+
+            <div class="result-grid">
+
+                <div class="info-box">
+                    <h3>Origin</h3>
+                    <p id="origin"></p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Destination</h3>
+                    <p id="destination"></p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Distance</h3>
+                    <p id="distance"></p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Transit Days</h3>
+                    <p id="days"></p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Transshipments</h3>
+                    <p id="transshipments"></p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Route Type</h3>
+                    <p id="routeType"></p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="freight-card">
+
+            <h2>💰 Freight Cost Summary</h2>
+
+            <div class="cost-box">
+
+                <p>
+                    Base Freight:
+                    <strong id="freight"></strong>
+                </p>
+
+                <p>
+                    Containers:
+                    <strong id="containers"></strong>
+                </p>
+
+                <hr>
+
+                <h2>
+                    Total Cost:
+                    <span id="totalCost"></span>
+                </h2>
+
+            </div>
+
+            <button
+                class="next-btn"
+                onclick="window.location.href='quotation.html'">
+                Generate Quotation →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const data =
+    JSON.parse(
+        localStorage.getItem("routeData")
+    );
+
+if(data){
+
+    document.getElementById("routeId")
+        .innerText = data.route_id;
+
+    document.getElementById("origin")
+        .innerText = data.origin;
+
+    document.getElementById("destination")
+        .innerText = data.destination;
+
+    document.getElementById("distance")
+        .innerText =
+        data.distance_nm + " NM";
+
+    document.getElementById("days")
+        .innerText =
+        data.transit_days + " Days";
+
+    document.getElementById("transshipments")
+        .innerText =
+        data.transshipments;
+
+    document.getElementById("routeType")
+        .innerText =
+        data.route_type;
+
+    document.getElementById("freight")
+        .innerText =
+        "$" + data.base_freight_usd;
+
+    const containers = 10;
+
+    document.getElementById("containers")
+        .innerText = containers;
+
+    const total =
+        data.base_freight_usd * containers;
+
+    document.getElementById("totalCost")
+        .innerText =
+        "$" + total.toLocaleString();
+}
+
+</script>
+
+</body>
+</html>

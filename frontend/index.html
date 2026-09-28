@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CargoPilot AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🚢 CargoPilot AI</h1>
+    <p>Agentic Maritime Freight Pricing & Route Optimization</p>
+
+    <div class="card">
+
+        <input type="text"
+               id="origin"
+               placeholder="Origin Port">
+
+        <input type="text"
+               id="destination"
+               placeholder="Destination Port">
+
+        <input type="text"
+               id="cargo"
+               placeholder="Cargo Type">
+
+        <input type="number"
+               id="containers"
+               placeholder="Containers">
+
+        <button onclick="analyzeRoute()">
+            Analyze Route
+        </button>
+
+    </div>
+
+    <div id="result"></div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+<section class="manual-quotation">
+
+    <h2>💰 Manual Freight Quotation</h2>
+
+    <div class="quotation-form">
+
+        <input type="text" id="customerName"
+            placeholder="Customer Name">
+
+        <input type="text" id="manualOrigin"
+            placeholder="Origin Port">
+
+        <input type="text" id="manualDestination"
+            placeholder="Destination Port">
+
+        <input type="text" id="manualCargo"
+            placeholder="Cargo Type">
+
+        <input type="number" id="manualContainers"
+            placeholder="Containers">
+
+        <input type="number" id="ratePerContainer"
+            placeholder="Rate Per Container ($)">
+
+        <input type="number" id="additionalCharges"
+            placeholder="Additional Charges ($)">
+
+        <button onclick="generateManualQuotation()">
+            Generate Manual Quotation
+        </button>
+
+    </div>
+
+    <div id="manualQuotationResult"></div>
+
+</section>
